@@ -37,7 +37,8 @@ namespace Paystack
                         CurrencySendPriority = 1,
                         AlertBalance = 9000000,
                         Status = GatewayStatus.Online,
-                        MaxAmount = 500000
+                        MaxAmount = 500000,
+                        Id = 1
                     }
                 };
             }

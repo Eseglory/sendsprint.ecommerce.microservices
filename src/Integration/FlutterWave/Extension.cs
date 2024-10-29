@@ -33,11 +33,12 @@ namespace FlutterWave
                         CredentialKey = "FlutterWaveConfig",
                         GatewayType = GatewayType.FlutterWave,
                         Name = "FlutterWave",
-                        CurrencyReceivePriority = 1,
-                        CurrencySendPriority = 1,
+                        CurrencyReceivePriority = 2,
+                        CurrencySendPriority = 2,
                         AlertBalance = 9000000,
                         Status = GatewayStatus.Online,
-                        MaxAmount = 500000
+                        MaxAmount = 500000,
+                        Id = 2,
                     }
                 };
             }
