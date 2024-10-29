@@ -5,11 +5,6 @@ using Weasel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
-//builder.Services.AddSwaggerService(builder.Configuration);
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(80);
-});
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
