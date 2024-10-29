@@ -23,14 +23,14 @@ namespace Paystack.Contracts
         private const string BalanceEndpoint = "/balance";
         private readonly PaystackConfig _config;
         private readonly ILogger<PaystackTransferService> _logger;
-        private readonly string _utilityHubApiHost;
+        private readonly string _sendSprintEcommerceApiHost;
 
-        public PaystackTransferService(PaystackConfig config, ILogger<PaystackTransferService> logger, string utilityHubApiHost, int gatewayId, int currencyReceivePriority, int currencySendPriority,
+        public PaystackTransferService(PaystackConfig config, ILogger<PaystackTransferService> logger, string sendSprintEcommerceApiHost, int gatewayId, int currencyReceivePriority, int currencySendPriority,
             int maxAmount, string credentialKey, string url, GatewayStatus status, int gatewayAlert)
         {
             _config = config;
             _logger = logger;
-            _utilityHubApiHost = utilityHubApiHost;
+            _sendSprintEcommerceApiHost = sendSprintEcommerceApiHost;
             GatewayId = gatewayId;
             CurrencyReceivePriority = currencyReceivePriority;
             CurrencySendPriority = currencySendPriority;
@@ -110,7 +110,7 @@ namespace Paystack.Contracts
             PaystackRequest paystack = new PaystackRequest
             {
                 reference = request.Reference,
-                callback_url = $"{_utilityHubApiHost}/{CallBackUrl}",
+                callback_url = $"{_sendSprintEcommerceApiHost}/{CallBackUrl}",
                 amount = Convert.ToString(request.Amount * 100),
                 email = request.Email,
             };

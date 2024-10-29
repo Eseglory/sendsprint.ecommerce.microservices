@@ -20,7 +20,7 @@ namespace Paystack
             using IServiceScope scope = services.BuildServiceProvider().CreateScope();
             var logger = scope.ServiceProvider.GetRequiredService<ILogger<PaystackTransferService>>();
             var gatewayManager = scope.ServiceProvider.GetRequiredService<IGatewayManager>();
-            var utilityHubApiHost = configuration.GetValue<string>("AppSettings:UtilityHubAPIHost");
+            var sendSprintEcommerceApiHost = configuration.GetValue<string>("AppSettings:SendSprintEcommerceAPIHost");
 
             List<Gateway> paystackGateways;
             try
@@ -56,7 +56,7 @@ namespace Paystack
                 }
 
                 gatewayManager.AddTransactionProvider(
-                    new PaystackTransferService(config, logger, utilityHubApiHost, Convert.ToInt32(gw.Id), gw.CurrencyReceivePriority,
+                    new PaystackTransferService(config, logger, sendSprintEcommerceApiHost, Convert.ToInt32(gw.Id), gw.CurrencyReceivePriority,
                         gw.CurrencySendPriority, Convert.ToInt32(gw.MaxAmount), gw.CredentialKey, gw.GatewayUrl, gw.Status, gw.AlertBalance)
                 );
             }

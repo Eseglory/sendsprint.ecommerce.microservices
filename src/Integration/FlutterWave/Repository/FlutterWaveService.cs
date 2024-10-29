@@ -26,16 +26,16 @@ namespace FlutterWave.Repository
         private readonly HttpClient _client;
         private readonly ILogger<FlutterWaveService> _logger;
         private readonly FlutterWaveConfig _config;
-        private readonly string _UtilityHubAPIHost;
+        private readonly string _SendSprintEcommerceAPIHost;
 
         public FlutterWaveService(HttpClient client, FlutterWaveConfig config, ILogger<FlutterWaveService> logger,
-            string UtilityHubAPIHost, int gatewayId, int currencyReceivePriority, int currencySendPriority,
+            string SendSprintEcommerceAPIHost, int gatewayId, int currencyReceivePriority, int currencySendPriority,
             int maxAmount, string credentialKey, string url, GatewayStatus status, int gatewayAlert)
         {
             _client = client;
             _logger = logger;
             _config = config;
-            _UtilityHubAPIHost = UtilityHubAPIHost;
+            _SendSprintEcommerceAPIHost = SendSprintEcommerceAPIHost;
             GatewayId = gatewayId;
             CurrencyReceivePriority = currencyReceivePriority;
             CurrencySendPriority = currencySendPriority;
@@ -160,7 +160,7 @@ namespace FlutterWave.Repository
                 tx_ref = request.Reference,
                 currency = "NGN",
                 payment_options = "card",
-                redirect_url = $"{_UtilityHubAPIHost}/{CallBackUrl}",
+                redirect_url = $"{_SendSprintEcommerceAPIHost}/{CallBackUrl}",
                 customer = customer
             };
 

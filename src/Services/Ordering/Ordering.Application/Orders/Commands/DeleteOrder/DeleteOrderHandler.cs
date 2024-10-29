@@ -16,10 +16,10 @@ public class DeleteOrderHandler(IApplicationDbContext dbContext)
         {
             throw new OrderNotFoundException(command.OrderId);
         }
-        if(order.Status == Domain.Enums.OrderStatus.OrderCompleted)
-        {
-            throw new OrderNotFoundException(command.OrderId);
-        }
+        //if(order.Status == Domain.Enums.OrderStatus.OrderCompleted)
+        //{
+        //    throw new OrderNotFoundException(command.OrderId);
+        //}
         dbContext.Orders.Remove(order);
         await dbContext.SaveChangesAsync(cancellationToken);
 
