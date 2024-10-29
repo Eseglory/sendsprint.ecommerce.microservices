@@ -1,6 +1,9 @@
 version: '3.4'
 
 services:
+  ngrok:
+    image: ngrok/ngrok:latest
+
   portainer:
     image: portainer/portainer-ce
 

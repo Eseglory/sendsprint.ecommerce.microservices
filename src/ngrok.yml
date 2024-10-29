@@ -1,0 +1,5 @@
+tunnels:
+  yarpapigateway:
+    proto: http
+    addr: 6004
+    host_header: custom.static.domain
