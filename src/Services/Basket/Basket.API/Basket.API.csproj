@@ -27,6 +27,7 @@
     <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\sendsprint.ecommerce.Common\sendsprint.ecommerce.Common.csproj" />
     <ProjectReference Include="..\..\..\Integration\FlutterWave\FlutterWave.csproj" />
+    <ProjectReference Include="..\..\..\Integration\Paystack\Paystack.csproj" />
   </ItemGroup>
 
   <ItemGroup>

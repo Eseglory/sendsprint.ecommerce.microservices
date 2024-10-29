@@ -194,10 +194,5 @@ namespace FlutterWave.Repository
                 Link = null
             };
         }
-
-        public override void ProcessError(string httpStatusCode, string message)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -18,6 +18,5 @@ namespace sendsprint.ecommerce.Common.PaymentGateway
         GatewayStatus Status { get; set; }
         GatewayType GatewayType { get; }
         int AlertBalance { get; set; }
-        void ProcessError(string httpStatusCode, string message);
     }
 }

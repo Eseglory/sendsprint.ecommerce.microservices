@@ -5,6 +5,7 @@ using BuildingBlocks.Messaging.MassTransit;
 using sendsprint.ecommerce.Common.Swagger;
 using sendsprint.ecommerce.Common.PaymentGateway; 
 using FlutterWave;
+using Paystack;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,7 @@ builder.Services.AddHttpClient("Gateway", client =>
 });
 builder.Services.AddSingleton<IGatewayManager, GatewayManager>();
 builder.Services.AddFlutterWave(builder.Configuration);
+builder.Services.AddPaystack(builder.Configuration);
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 
