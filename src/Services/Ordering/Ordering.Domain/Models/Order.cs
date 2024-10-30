@@ -1,4 +1,6 @@
-﻿namespace Ordering.Domain.Models;
+﻿using System.Security.AccessControl;
+
+namespace Ordering.Domain.Models;
 public class Order : Aggregate<OrderId>
 {
     private readonly List<OrderItem> _orderItems = new();
@@ -8,15 +10,16 @@ public class Order : Aggregate<OrderId>
     public OrderName OrderName { get; private set; } = default!;
     public Address ShippingAddress { get; private set; } = default!;
     public Address BillingAddress { get; private set; } = default!;
-    public string Payment { get; private set; } = default!;
-    //public OrderStatus Status { get; private set; } = OrderStatus.Pending;
+    public string Payment { get; set; } = default!;
+    public string TransactionReference { get; private set; } = default!;
+    public OrderStatus Status { get; set; } = OrderStatus.Pending;
     public decimal TotalPrice
     {
         get => OrderItems.Sum(x => x.Price * x.Quantity);
         private set { }
     }
 
-    public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, string payment)
+    public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, string payment, string transactionReference)
     {
         var order = new Order
         {
@@ -26,7 +29,8 @@ public class Order : Aggregate<OrderId>
             ShippingAddress = shippingAddress,
             BillingAddress = billingAddress,
             Payment = payment,
-            //Status = OrderStatus.Pending
+            TransactionReference = transactionReference,
+            Status = OrderStatus.Pending
         };
 
         order.AddDomainEvent(new OrderCreatedEvent(order));
@@ -34,13 +38,13 @@ public class Order : Aggregate<OrderId>
         return order;
     }
 
-    public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, string payment)
+    public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, string payment, OrderStatus status)
     {
         OrderName = orderName;
         ShippingAddress = shippingAddress;
         BillingAddress = billingAddress;
         Payment = payment;
-        //Status = status;
+        Status = status;
 
         AddDomainEvent(new OrderUpdatedEvent(this));
     }

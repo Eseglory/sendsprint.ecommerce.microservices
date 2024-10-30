@@ -9,5 +9,6 @@ public record OrderDto(
     AddressDto ShippingAddress,
     AddressDto BillingAddress,
     string Payment,
-    //OrderStatus Status,
+    string TransactionReference,
+    OrderStatus Status,
     List<OrderItemDto> OrderItems);

@@ -1,9 +1,9 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Options;
-using Weasel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
 var assembly = typeof(Program).Assembly;
 builder.Services.AddMediatR(config =>
 {
@@ -17,12 +17,11 @@ builder.Services.AddCarter();
 
 builder.Services.AddMarten(opts =>
 {
-    opts.Connection(builder.Configuration.GetConnectionString("Database")!);
-    opts.AutoCreateSchemaObjects = AutoCreate.All;
+    opts.Connection(builder.Configuration.GetConnectionString("Database")!);    
 }).UseLightweightSessions();
 
 if (builder.Environment.IsDevelopment())
-    //builder.Services.InitializeMartenWith<CatalogInitialData>();
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
@@ -30,7 +29,8 @@ builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
 
 var app = builder.Build();
-//app.UseSwaggerService(builder.Configuration);
+
+// Configure the HTTP request pipeline.
 app.MapCarter();
 
 app.UseExceptionHandler(options => { });

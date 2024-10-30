@@ -30,7 +30,7 @@ namespace Paystack.Model
         public string Status { get; set; }
         public string Reference { get; set; }
         public object Receipt_Number { get; set; }
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         public object Message { get; set; }
         public string Gateway_Response { get; set; }
         public object Paid_At { get; set; }
@@ -40,7 +40,7 @@ namespace Paystack.Model
         public string Ip_Address { get; set; }
         public string MetaData { get; set; }
         public object Log { get; set; }
-        public double Fees { get; set; }
+        public decimal Fees { get; set; }
         public object Fees_Split { get; set; }
         public Authorization Authorization { get; set; }
         public Customer Customer { get; set; }

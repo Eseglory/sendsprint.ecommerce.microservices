@@ -1,4 +1,6 @@
-﻿namespace BuildingBlocks.Messaging.Events;
+﻿using System.Security.AccessControl;
+
+namespace BuildingBlocks.Messaging.Events;
 public record BasketCheckoutEvent : IntegrationEvent
 {
     public string UserName { get; set; } = default!;
@@ -14,4 +16,5 @@ public record BasketCheckoutEvent : IntegrationEvent
     public string State { get; set; } = default!;
     public string ZipCode { get; set; } = default!;
     public string EncryptedPaymentData { get; set; } = default!;
+    public string TransactionReference { get; set; } = default!;
 }

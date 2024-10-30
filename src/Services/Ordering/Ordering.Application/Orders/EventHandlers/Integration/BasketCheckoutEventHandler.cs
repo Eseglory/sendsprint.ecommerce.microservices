@@ -20,6 +20,7 @@ public class BasketCheckoutEventHandler
     {
         // Create full order with incoming event data
         var addressDto = new AddressDto(message.FirstName, message.LastName, message.EmailAddress, message.AddressLine, message.Country, message.State, message.ZipCode);
+        var paymentDto = message.EncryptedPaymentData;
         var orderId = Guid.NewGuid();
 
         var orderDto = new OrderDto(
@@ -28,8 +29,9 @@ public class BasketCheckoutEventHandler
             OrderName: message.UserName,
             ShippingAddress: addressDto,
             BillingAddress: addressDto,
-            Payment: message.EncryptedPaymentData,
-            //Status: Ordering.Domain.Enums.OrderStatus.Pending,
+            Payment: paymentDto,
+            TransactionReference: message.TransactionReference,
+            Status: Ordering.Domain.Enums.OrderStatus.Pending,
             OrderItems:
             [
                 new OrderItemDto(orderId, new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"), 2, 500),

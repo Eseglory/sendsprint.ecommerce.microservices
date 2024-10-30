@@ -12,10 +12,10 @@ namespace sendsprint.ecommerce.Common.PaymentGateway.Model
         public string? Status { get; set; }
 
         [JsonProperty("amount")]
-        public double? Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         [JsonProperty("settled_amount")]
-        public double? SettledAmount { get; set; }
+        public decimal? SettledAmount { get; set; }
 
         [JsonProperty("transactionInfo")]
         public string? TransactionInfo { get; set; }

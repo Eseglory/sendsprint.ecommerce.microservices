@@ -70,7 +70,7 @@ namespace Paystack.Contracts
                     {
                         TransactionStatus = MapTransactionStatus(result.Data.Status),
                         Status = result.Data.Status,
-                        Amount = (double)(result.Data.Amount) / 100,
+                        Amount = (decimal)(result.Data.Amount) / 100,
                         SettledAmount = (result.Data.Amount - result.Data.Fees) / 100
                     });
             }

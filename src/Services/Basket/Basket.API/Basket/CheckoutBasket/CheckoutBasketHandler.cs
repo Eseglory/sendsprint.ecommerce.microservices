@@ -37,9 +37,10 @@ public class CheckoutBasketCommandHandler
         {
             return new List<PaymentProvider>();
         }
-
+        var transactionReference = $"SSP-{CodeGenerator.RandomAlphabetString(21)}";
         var eventMessage = command.BasketCheckoutDto.Adapt<BasketCheckoutEvent>();
         eventMessage.TotalPrice = basket.TotalPrice;
+        eventMessage.TransactionReference = transactionReference;
 
         await publishEndpoint.Publish(eventMessage, cancellationToken);
         //TODO: move the delete to payment gateway callback
@@ -48,7 +49,6 @@ public class CheckoutBasketCommandHandler
         #region get payment gateway services
         var gateways = gatewayManager.GetCurrencyReceiveProviderList(eventMessage.TotalPrice);
         var paymentProviders = new List<PaymentProvider>();
-        var transactionReference = $"SSP-{CodeGenerator.RandomAlphabetString(21)}";
 
         var paymentRequest = new ReceiveFundsRequest
         {

@@ -61,7 +61,7 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
     return handler;
 });
 
-//builder.Services.AddSwaggerService(builder.Configuration);
+builder.Services.AddSwaggerService(builder.Configuration);
 builder.Services.AddMessageBroker(builder.Configuration);
 
 //Cross-Cutting Services
@@ -73,7 +73,7 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
-//app.UseSwaggerService(builder.Configuration);
+app.UseSwaggerService(builder.Configuration);
 app.MapCarter();
 app.UseExceptionHandler(options => { });
 app.UseHealthChecks("/health",

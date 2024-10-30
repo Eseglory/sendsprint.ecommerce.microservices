@@ -27,7 +27,8 @@ public class CreateOrderHandler(IApplicationDbContext dbContext)
                 orderName: OrderName.Of(orderDto.OrderName),
                 shippingAddress: shippingAddress,
                 billingAddress: billingAddress,
-                payment: orderDto.Payment
+                payment: orderDto.Payment,
+                transactionReference: orderDto.TransactionReference
                 );
 
         foreach (var orderItemDto in orderDto.OrderItems)

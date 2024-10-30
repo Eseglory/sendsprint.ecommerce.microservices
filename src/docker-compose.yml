@@ -1,11 +1,8 @@
-# version: '3.4'
+version: '3.4'
 
 services:
   ngrok:
     image: ngrok/ngrok:latest
-
-  portainer:
-    image: portainer/portainer-ce
 
   catalogdb:
     image: postgres
@@ -15,6 +12,9 @@ services:
 
   distributedcache:
     image: redis
+
+  orderdb:
+    image: mcr.microsoft.com/mssql/server
 
   messagebroker:
     image: rabbitmq:management
@@ -31,6 +31,12 @@ services:
       context: .
       dockerfile: Services/Basket/Basket.API/Dockerfile
 
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.Grpc/Dockerfile
+
   ordering.api:
     image: ${DOCKER_REGISTRY-}orderingapi
     build:
@@ -44,7 +50,6 @@ services:
       dockerfile: ApiGateways/YarpApiGateway/Dockerfile
 
 volumes:
-  portainer_data:
   postgres_catalog:
   postgres_basket:
 

@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\sendsprint.ecommerce.Common\sendsprint.ecommerce.Common.csproj" />
   </ItemGroup>
 
 </Project>

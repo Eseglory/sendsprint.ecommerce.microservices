@@ -16,10 +16,10 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext)
         {
             throw new OrderNotFoundException(command.Order.Id);
         }
-        //if (order.Status == Domain.Enums.OrderStatus.OrderCompleted)
-        //{
-        //    throw new OrderNotFoundException(command.Order.Id);
-        //}
+        if (order.Status == Domain.Enums.OrderStatus.Completed)
+        {
+            throw new OrderNotFoundException(command.Order.Id);
+        }
 
         UpdateOrderWithNewValues(order, command.Order);
 
@@ -38,8 +38,8 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext)
             orderName: OrderName.Of(orderDto.OrderName),
             shippingAddress: updatedShippingAddress,
             billingAddress: updatedBillingAddress,
-            payment: orderDto.Payment
-            //status: orderDto.Status
+            payment: orderDto.Payment,
+            status: orderDto.Status
             );
     }
 }

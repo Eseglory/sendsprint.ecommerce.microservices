@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\sendsprint.ecommerce.Common\sendsprint.ecommerce.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
   </ItemGroup>
 

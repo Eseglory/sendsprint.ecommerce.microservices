@@ -18,7 +18,7 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            options.UseSqlServer(connectionString);
         });
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();

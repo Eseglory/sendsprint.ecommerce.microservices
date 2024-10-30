@@ -19,36 +19,36 @@ namespace Ordering.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Ordering.Domain.Models.Customer", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -61,29 +61,39 @@ namespace Ordering.Infrastructure.Migrations
             modelBuilder.Entity("Ordering.Domain.Models.Order", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("CustomerId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Payment")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Pending");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("TransactionReference")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.ComplexProperty<Dictionary<string, object>>("BillingAddress", "Ordering.Domain.Models.Order.BillingAddress#Address", b1 =>
                         {
@@ -92,36 +102,36 @@ namespace Ordering.Infrastructure.Migrations
                             b1.Property<string>("AddressLine")
                                 .IsRequired()
                                 .HasMaxLength(180)
-                                .HasColumnType("varchar(180)");
+                                .HasColumnType("nvarchar(180)");
 
                             b1.Property<string>("Country")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("EmailAddress")
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("FirstName")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("LastName")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("State")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("ZipCode")
                                 .IsRequired()
                                 .HasMaxLength(5)
-                                .HasColumnType("varchar(5)");
+                                .HasColumnType("nvarchar(5)");
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("OrderName", "Ordering.Domain.Models.Order.OrderName#OrderName", b1 =>
@@ -131,7 +141,7 @@ namespace Ordering.Infrastructure.Migrations
                             b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("varchar(100)")
+                                .HasColumnType("nvarchar(100)")
                                 .HasColumnName("OrderName");
                         });
 
@@ -142,36 +152,36 @@ namespace Ordering.Infrastructure.Migrations
                             b1.Property<string>("AddressLine")
                                 .IsRequired()
                                 .HasMaxLength(180)
-                                .HasColumnType("varchar(180)");
+                                .HasColumnType("nvarchar(180)");
 
                             b1.Property<string>("Country")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("EmailAddress")
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("FirstName")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("LastName")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("State")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("varchar(50)");
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("ZipCode")
                                 .IsRequired()
                                 .HasMaxLength(5)
-                                .HasColumnType("varchar(5)");
+                                .HasColumnType("nvarchar(5)");
                         });
 
                     b.HasKey("Id");
@@ -184,28 +194,28 @@ namespace Ordering.Infrastructure.Migrations
             modelBuilder.Entity("Ordering.Domain.Models.OrderItem", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("OrderId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -222,27 +232,27 @@ namespace Ordering.Infrastructure.Migrations
             modelBuilder.Entity("Ordering.Domain.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 

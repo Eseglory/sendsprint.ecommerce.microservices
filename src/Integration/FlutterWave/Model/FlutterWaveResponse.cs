@@ -26,7 +26,7 @@ namespace FlutterWave.Model
         public dynamic Fee { get; set; }
         public string Link { get; set; }
         public decimal? app_fee { get; set; }
-        public double? amount_settled { get; set; }
+        public decimal? amount_settled { get; set; }
         public string tx_ref { get; set; }
     }
     public abstract class BaseFlutterWave
@@ -99,7 +99,7 @@ namespace FlutterWave.Model
         public string tx_ref { get; set; }
         public string flw_ref { get; set; }
         public string device_fingerprint { get; set; }
-        public double amount { get; set; }
+        public decimal amount { get; set; }
         public string currency { get; set; }
         public double charged_amount { get; set; }
         public double app_fee { get; set; }
@@ -114,7 +114,7 @@ namespace FlutterWave.Model
         public int account_id { get; set; }
         public Card card { get; set; }
         public Meta meta { get; set; }
-        public double amount_settled { get; set; }
+        public decimal amount_settled { get; set; }
         public Customer customer { get; set; }
     }
 
